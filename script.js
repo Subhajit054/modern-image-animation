@@ -1,30 +1,19 @@
-// Falling hearts animation function
-function fallingHearts() {
-  setInterval(() => {
-    const heart = document.createElement('div');
-    heart.innerText = "❤️";
-    heart.style.cssText = `
-        position: fixed;
-        left: ${Math.random() * 100}%;
-        top: -20px;
-        font-size: ${Math.random() * 20 + 20}px;
-        animation: fall 3s linear;`;
-    document.getElementById('floating-hearts').appendChild(heart);
-    setTimeout(() => heart.remove(), 3000);
-  }, 150);
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+
+function showNextSlide() {
+    // Hide the current slide
+    slides[currentSlide].classList.remove('active');
+
+    // Move to the next slide (or loop back to the first)
+    currentSlide = (currentSlide + 1) % slides.length;
+
+    // Show the new slide
+    slides[currentSlide].classList.add('active');
 }
 
-fallingHearts(); // Start falling hearts
+// Initialize the slideshow
+slides[currentSlide].classList.add('active');
 
-let currentCard = 0;
-const cards = document.querySelectorAll('.card');
-
-function showNextCard() {
-  if (currentCard < cards.length) {
-    cards[currentCard].style.transform = "rotateY(180deg)";
-    currentCard++;
-    setTimeout(showNextCard, 1500); // 1.5 seconds between showing cards
-  }
-}
-
-document.addEventListener('DOMContentLoaded', showNextCard);
+// Change slide every 3 seconds
+setInterval(showNextSlide, 3000);
