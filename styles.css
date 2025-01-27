@@ -1,74 +1,123 @@
+/* General Styles */
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(to bottom, #1e293b, #0f172a);
-    color: white;
-    text-align: center;
+    background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
+    color: #333;
+    overflow: hidden;
 }
 
+/* Intro Section */
 .intro {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #1e293b;
-    color: #38bdf8;
+    background-color: #ff6f61;
+    color: white;
+    text-align: center;
 }
 
 .intro h1 {
-    font-size: 2.5rem;
+    font-size: 3rem;
     margin-bottom: 20px;
+    color: #ffe4e1;
 }
 
 #reveal-button {
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    color: white;
-    background-color: #38bdf8;
+    padding: 15px 30px;
+    font-size: 1.5rem;
+    color: #fff;
+    background-color: #ff3e96;
     border: none;
-    border-radius: 5px;
+    border-radius: 25px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: transform 0.3s ease, background-color 0.3s;
 }
 
 #reveal-button:hover {
-    background-color: #0ea5e9;
+    background-color: #ff69b4;
+    transform: scale(1.1);
 }
 
+/* Hidden Animation Section */
 .hidden {
     display: none;
 }
 
+/* Animation Container */
 .animation-container {
+    position: relative;
     height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     overflow: hidden;
-    position: relative;
 }
 
-#animation-wrapper {
-    width: 80%;
-    height: 80%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
-
-.animation-item {
+/* Floating Elements */
+#floating-elements {
+    position: absolute;
     width: 100%;
     height: 100%;
-    position: absolute;
-    background-size: cover;
-    background-position: center;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
+    pointer-events: none;
 }
 
-.animation-item.active {
-    opacity: 1;
+.floating-heart, .floating-flower {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    animation: float 5s infinite ease-in-out;
+    pointer-events: none;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Card Wrapper */
+#card-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    position: relative;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.card {
+    width: 200px;
+    height: 300px;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    transform: rotateY(0deg);
+    animation: card-flip 1.5s ease-in-out infinite;
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@keyframes card-flip {
+    0%, 100% {
+        transform: rotateY(0deg);
+    }
+    50% {
+        transform: rotateY(180deg);
+    }
 }
