@@ -1,21 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Surprise Animation</title>
-    <link rel="stylesheet" href="styles.css">
-    <script defer src="main.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Surprise for My Best Friend</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="welcome-screen">
-        <button id="surprise-button">She has a surprise!</button>
-    </div>
+  <!-- Floating hearts animation area -->
+  <div id="floating-hearts"></div>
 
-    <div class="animation-screen hidden">
-        <div id="card-container" class="hidden">
-            <!-- Cards will be inserted here by JavaScript -->
-        </div>
+  <div id="cards-container">
+    <div class="card" id="card1">
+      <div class="card-front">
+        <img src="images/photo1.jpg" alt="photo1" />
+      </div>
+      <div class="card-back">
+        <p>Your smile brightens up my day every time.</p>
+      </div>
     </div>
+    <!-- Repeat for other cards -->
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
