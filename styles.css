@@ -1,77 +1,69 @@
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f7f7f7;
-  overflow-x: hidden;
-  margin: 0;
-}
- 
-#floating-hearts {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #000;
+    color: #fff;
+    text-align: center;
 }
 
-#cards-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 50px;
-  align-items: center;
-  margin-top: 100px;
+header {
+    background: #333;
+    padding: 20px;
 }
 
-.card {
-  width: 200px;
-  height: 200px;
-  margin: 20px;
-  perspective: 1000px;
-  cursor: pointer;
-  border-radius: 50%; /* Circular shape */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  transition: transform 0.8s ease;
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
 }
 
-.card .card-front,
-.card .card-back {
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-radius: 50%;
+header p {
+    margin: 5px 0 0;
+    font-size: 1.2rem;
+    color: #a0ffa0;
 }
 
-.card .card-front img {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
+.slideshow {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    margin: 20px auto;
 }
 
-.card .card-back {
-  background-color: #ffde59;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #333;
-  font-size: 18px;
-  text-align: center;
-  transform: rotateY(180deg);
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
 }
 
-.card:hover .card-front {
-  transform: rotateY(180deg);
+.slide.active {
+    opacity: 1;
 }
 
-.card:hover .card-back {
-  transform: rotateY(0);
+footer {
+    position: fixed;
+    bottom: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 }
 
-@keyframes fall {
-  to {
-    transform: translateY(100vh);
-  }
+footer button {
+    background: #222;
+    color: #fff;
+    border: 1px solid #555;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+footer button:hover {
+    background: #444;
 }
