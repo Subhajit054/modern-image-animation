@@ -1,54 +1,41 @@
-const images = [
-    'images/image1.jpg',
-    'images/image2.jpg',
-    'images/image3.jpg',
-    'images/image4.jpg',
-    'images/image5.jpg',
-    'images/image6.jpg',
-    'images/image7.jpg',
-    'images/image8.jpg'
-];
+document.getElementById('surprise-button').addEventListener('click', () => {
+    // Hide the button
+    document.getElementById('surprise-button').style.display = 'none';
 
-const revealButton = document.getElementById('reveal-button');
-const animationContainer = document.getElementById('animation-container');
-const floatingElements = document.getElementById('floating-elements');
-const cardStack = document.getElementById('card-stack');
+    // Start floating elements animation
+    createFloatingElements();
 
-// Create floating elements
+    // Start card animation
+    const cardContainer = document.getElementById('card-container');
+    const images = ['./images/image1.jpg', './images/image2.jpg', './images/image3.jpg', './images/image4.jpg'];
+
+    images.forEach((src, index) => {
+        setTimeout(() => {
+            const card = document.createElement('div');
+            card.classList.add('card');
+
+            const img = document.createElement('img');
+            img.src = src;
+            card.appendChild(img);
+
+            cardContainer.appendChild(card);
+        }, index * 1500);
+    });
+});
+
 function createFloatingElements() {
-    const types = ['heart', 'flower'];
-    for (let i = 0; i < 30; i++) {
+    const floatingArea = document.getElementById('floating-elements');
+
+    for (let i = 0; i < 50; i++) {
         const element = document.createElement('div');
-        const type = types[Math.floor(Math.random() * types.length)];
-        element.classList.add(type === 'heart' ? 'floating-heart' : 'floating-flower');
-        element.style.left = `${Math.random() * 100}vw`;
-        element.style.animationDuration = `${Math.random() * 3 + 2}s`;
-        floatingElements.appendChild(element);
+        element.className = Math.random() > 0.5 ? 'heart' : 'flower';
+        element.style.left = Math.random() * 100 + 'vw';
+        element.style.animationDuration = Math.random() * 3 + 2 + 's';
+        element.style.animationDelay = Math.random() * 2 + 's';
+
+        floatingArea.appendChild(element);
+
+        // Remove element after animation ends
+        element.addEventListener('animationend', () => element.remove());
     }
 }
-
-// Create animated cards
-function createCards() {
-    images.forEach((image, index) => {
-        const card = document.createElement('div');
-        card.classList.add('card');
-        const img = document.createElement('img');
-        img.src = image;
-        card.appendChild(img);
-
-        setTimeout(() => {
-            card.style.transform = `translateY(${(index + 1) * -40}px) rotateY(0deg)`;
-            card.style.opacity = '1';
-        }, index * 1200); // Delays each card animation
-
-        cardStack.appendChild(card);
-    });
-}
-
-// Reveal the animation on button click
-revealButton.addEventListener('click', () => {
-    document.querySelector('.intro').classList.add('hidden');
-    animationContainer.classList.remove('hidden');
-    createFloatingElements();
-    createCards();
-});
