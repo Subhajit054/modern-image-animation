@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Photo Frame</title>
+    <style>
+        /* General Body Styling */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: radial-gradient(circle, #ffecd2, #fcb69f);
+            overflow: hidden;
+        }
+
+        /* Frame Container */
+        .frame-container {
+            text-align: center;
+            animation: zoomIn 2s ease-out;
+        }
+
+        /* Photo Frame */
+        .photo-frame {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+            border: 10px solid transparent;
+            border-image: linear-gradient(45deg, #ff6f61, #ff9a8b) 1;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2), 0 0 15px rgba(255, 111, 97, 0.7);
+            animation: glow 2s infinite alternate;
+            overflow: hidden;
+            background: #ffffff;
+        }
+
+        /* Slideshow Styling */
+        .slideshow {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slide {
+            position: absolute;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain; /* Ensure the full image is displayed without cropping */
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        /* Message Styling */
+        .message {
+            margin-top: 20px;
+            font-size: 1.5rem;
+            color: #ffffff;
+            font-weight: bold;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            animation: fadeInOut 3s infinite alternate;
+        }
+
+        /* Button Styling */
+        .change-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .change-button:hover {
+            background-color: #ff4b47;
+            transform: scale(1.1);
+        }
+
+        /* Keyframes for Glow Animation */
+        @keyframes glow {
+            0% {
+                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2), 0 0 10px rgba(255, 111, 97, 0.5);
+            }
+            100% {
+                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2), 0 0 25px rgba(255, 111, 97, 0.8);
+            }
+        }
+
+        /* Keyframes for Fade In and Out Animation */
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0.8;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Heart Falling Animation */
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        .heart {
+            position: fixed;
+            top: -50px;
+            font-size: 30px;
+            color: red;
+            animation: fall 3s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="frame-container">
+        <div class="photo-frame">
+            <div class="slideshow">
+                <img src="images/image1.jpg" alt="Image 1" class="slide active">
+                <img src="images/image2.jpg" alt="Image 2" class="slide">
+                <img src="images/image3.jpg" alt="Image 3" class="slide">
+                <img src="images/image4.jpg" alt="Image 4" class="slide">
+                <img src="images/image5.jpg" alt="Image 5" class="slide">
+                <img src="images/image6.jpg" alt="Image 6" class="slide">
+                <img src="images/image7.jpg" alt="Image 7" class="slide">
+                <img src="images/image8.jpg" alt="Image 8" class="slide">
+            </div>
+        </div>
+        <h1 class="message">You are an amazing friend!</h1>
+        <button class="change-button" onclick="changeImage()">Next Image</button>
+    </div>
+
+    <script>
+        // Select all slides
+        const slides = document.querySelectorAll(".slide");
+        let currentSlide = 0;
+
+        // Function to show the next slide
+        function showNextSlide() {
+            slides[currentSlide].classList.remove("active");
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add("active");
+        }
+
+        // Change slide every 5 seconds
+        setInterval(showNextSlide, 5000);
+
+        // Function to manually change the image
+        function changeImage() {
+            slides[currentSlide].classList.remove("active");
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add("active");
+        }
+
+        // Falling Hearts Animation
+        function fallingHearts() {
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.innerText = "🌸";
+                heart.classList.add('heart');
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.animationDuration = Math.random() * 2 + 3 + "s";
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 5000);
+            }, 300);
+        }
+
+        fallingHearts();
+    </script>
+</body>
+</html>
