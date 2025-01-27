@@ -1,74 +1,45 @@
-body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(to bottom, #1e293b, #0f172a);
-    color: white;
-    text-align: center;
+const images = [
+    'images/image1.jpg',
+    'images/image2.jpg',
+    'images/image3.jpg',
+    'images/image4.jpg',
+    'images/image5.jpg',
+    'images/image6.jpg',
+    'images/image7.jpg',
+    'images/image8.jpg'
+];
+
+const revealButton = document.getElementById('reveal-button');
+const animationContainer = document.getElementById('animation-container');
+const wrapper = document.getElementById('animation-wrapper');
+
+// Create image elements dynamically
+images.forEach(image => {
+    const div = document.createElement('div');
+    div.classList.add('animation-item');
+    div.style.backgroundImage = `url(${image})`;
+    wrapper.appendChild(div);
+});
+
+let currentIndex = 0;
+
+// Function to cycle through images
+function cycleImages() {
+    const items = document.querySelectorAll('.animation-item');
+    items.forEach((item, index) => {
+        if (index === currentIndex) {
+            item.classList.add('active');
+        } else {
+            item.classList.remove('active');
+        }
+    });
+    currentIndex = (currentIndex + 1) % images.length;
 }
 
-.intro {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #1e293b;
-    color: #38bdf8;
-}
-
-.intro h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-}
-
-#reveal-button {
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    color: white;
-    background-color: #38bdf8;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-#reveal-button:hover {
-    background-color: #0ea5e9;
-}
-
-.hidden {
-    display: none;
-}
-
-.animation-container {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    position: relative;
-}
-
-#animation-wrapper {
-    width: 80%;
-    height: 80%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
-
-.animation-item {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    background-size: cover;
-    background-position: center;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-}
-
-.animation-item.active {
-    opacity: 1;
-}
+// Reveal the animation on button click
+revealButton.addEventListener('click', () => {
+    document.querySelector('.intro').classList.add('hidden');
+    animationContainer.classList.remove('hidden');
+    setInterval(cycleImages, 3000);
+    cycleImages();
+});
