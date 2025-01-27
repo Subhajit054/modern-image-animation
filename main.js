@@ -12,7 +12,7 @@ const images = [
 const revealButton = document.getElementById('reveal-button');
 const animationContainer = document.getElementById('animation-container');
 const floatingElements = document.getElementById('floating-elements');
-const cardWrapper = document.getElementById('card-wrapper');
+const cardStack = document.getElementById('card-stack');
 
 // Create floating elements
 function createFloatingElements() {
@@ -27,15 +27,21 @@ function createFloatingElements() {
     }
 }
 
-// Create cards dynamically
+// Create animated cards
 function createCards() {
-    images.forEach(image => {
+    images.forEach((image, index) => {
         const card = document.createElement('div');
         card.classList.add('card');
         const img = document.createElement('img');
         img.src = image;
         card.appendChild(img);
-        cardWrapper.appendChild(card);
+
+        setTimeout(() => {
+            card.style.transform = `translateY(${(index + 1) * -40}px) rotateY(0deg)`;
+            card.style.opacity = '1';
+        }, index * 1200); // Delays each card animation
+
+        cardStack.appendChild(card);
     });
 }
 
