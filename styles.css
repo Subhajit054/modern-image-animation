@@ -1,126 +1,113 @@
-/* General Styles */
 body {
-    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
-    color: #333;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #f8b500, #f85f73);
     overflow: hidden;
 }
 
-/* Intro Section */
-.intro {
+.container {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #ff6f61;
-    color: white;
-    text-align: center;
+    flex-direction: column;
 }
 
-.intro h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
-    color: #ffe4e1;
-}
-
-#reveal-button {
-    padding: 15px 30px;
+button {
+    padding: 1rem 2rem;
     font-size: 1.5rem;
     color: #fff;
-    background-color: #ff3e96;
+    background: #e63946;
     border: none;
-    border-radius: 25px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: transform 0.3s ease, background-color 0.3s;
+    transition: 0.3s ease;
 }
 
-#reveal-button:hover {
-    background-color: #ff69b4;
-    transform: scale(1.1);
+button:hover {
+    background: #d62839;
 }
 
-/* Hidden Animation Section */
-.hidden {
-    display: none;
-}
-
-/* Animation Container */
-.animation-container {
+#animation-area {
     position: relative;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
 }
 
-/* Floating Elements */
 #floating-elements {
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     pointer-events: none;
 }
 
-.floating-heart, .floating-flower {
+.heart, .flower {
     position: absolute;
-    width: 40px;
-    height: 40px;
-    animation: float 5s infinite ease-in-out;
-    pointer-events: none;
+    width: 20px;
+    height: 20px;
+    background-size: cover;
+    animation: float 5s infinite;
 }
 
-.floating-heart {
-    background: url('images/heart.png') no-repeat center;
-    background-size: cover;
+.heart {
+    background-image: url('./images/heart.png');
 }
 
-.floating-flower {
-    background: url('images/flower.png') no-repeat center;
-    background-size: cover;
+.flower {
+    background-image: url('./images/flower.png');
 }
 
 @keyframes float {
     0% {
-        transform: translateY(100vh) rotate(0deg);
-        opacity: 0;
-    }
-    50% {
+        transform: translateY(0);
         opacity: 1;
     }
     100% {
-        transform: translateY(-100vh) rotate(360deg);
+        transform: translateY(-800px) rotate(360deg);
         opacity: 0;
     }
 }
 
-/* Card Stack */
-#card-stack {
-    position: relative;
-    width: 80%;
-    height: 80vh;
-    margin: 0 auto;
+#card-container {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
 }
 
 .card {
-    position: absolute;
-    width: 220px;
-    height: 320px;
-    background-color: white;
-    border: 10px solid #ff6f61;
+    width: 300px;
+    height: 400px;
+    margin: 10px 0;
+    background: #fff;
     border-radius: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transform: translateY(100vh) rotateY(180deg);
-    opacity: 0;
-    transition: transform 1s ease-in-out, opacity 1s;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transform: scale(0);
+    transform-origin: center;
+    animation: popIn 1s ease forwards;
 }
 
 .card img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 5px;
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
