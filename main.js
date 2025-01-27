@@ -11,35 +11,38 @@ const images = [
 
 const revealButton = document.getElementById('reveal-button');
 const animationContainer = document.getElementById('animation-container');
-const wrapper = document.getElementById('animation-wrapper');
+const floatingElements = document.getElementById('floating-elements');
+const cardWrapper = document.getElementById('card-wrapper');
 
-// Create image elements dynamically
-images.forEach(image => {
-    const div = document.createElement('div');
-    div.classList.add('animation-item');
-    div.style.backgroundImage = `url(${image})`;
-    wrapper.appendChild(div);
-});
+// Create floating elements
+function createFloatingElements() {
+    const types = ['heart', 'flower'];
+    for (let i = 0; i < 30; i++) {
+        const element = document.createElement('div');
+        const type = types[Math.floor(Math.random() * types.length)];
+        element.classList.add(type === 'heart' ? 'floating-heart' : 'floating-flower');
+        element.style.left = `${Math.random() * 100}vw`;
+        element.style.animationDuration = `${Math.random() * 3 + 2}s`;
+        floatingElements.appendChild(element);
+    }
+}
 
-let currentIndex = 0;
-
-// Function to cycle through images
-function cycleImages() {
-    const items = document.querySelectorAll('.animation-item');
-    items.forEach((item, index) => {
-        if (index === currentIndex) {
-            item.classList.add('active');
-        } else {
-            item.classList.remove('active');
-        }
+// Create cards dynamically
+function createCards() {
+    images.forEach(image => {
+        const card = document.createElement('div');
+        card.classList.add('card');
+        const img = document.createElement('img');
+        img.src = image;
+        card.appendChild(img);
+        cardWrapper.appendChild(card);
     });
-    currentIndex = (currentIndex + 1) % images.length;
 }
 
 // Reveal the animation on button click
 revealButton.addEventListener('click', () => {
     document.querySelector('.intro').classList.add('hidden');
     animationContainer.classList.remove('hidden');
-    setInterval(cycleImages, 3000);
-    cycleImages();
+    createFloatingElements();
+    createCards();
 });
