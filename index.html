@@ -190,3 +190,84 @@
     </script>
 </body>
 </html>
+      /* pointer following */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mouse Pointer Flower Scatter</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      background-color: #accbed;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .flower {
+      position: absolute;
+      font-size: 20px;
+      pointer-events: none;
+      opacity: 1;
+      animation: scatter 3s forwards;
+    }
+
+    @keyframes scatter {
+      0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(var(--x), var(--y)) scale(2);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <script>
+    document.addEventListener('mousemove', (e) => {
+      const numFlowers = 5;  // Number of flowers to scatter from the mouse pointer
+      for (let i = 0; i < numFlowers; i++) {
+        const flower = document.createElement('div');
+        flower.classList.add('flower');
+        flower.innerText = "🌸";  // You can use any emoji or image
+
+        // Generate random values for the scatter effect
+        const angle = Math.random() * 2 * Math.PI;  // Random angle in radians
+        const distance = Math.random() * 100 + 50;  // Random distance between 50px and 150px
+        const offsetX = Math.cos(angle) * distance;
+        const offsetY = Math.sin(angle) * distance;
+
+        // Apply the random offset to the flower's position
+        flower.style.left = `${e.pageX + (Math.random() * 10 - 5)}px`;  // Small random offset for variation
+        flower.style.top = `${e.pageY + (Math.random() * 10 - 5)}px`;
+
+        // Set the scatter animation offsets using CSS variables
+        flower.style.setProperty('--x', `${offsetX}px`);
+        flower.style.setProperty('--y', `${offsetY}px`);
+
+        // Add the flower to the document
+        document.body.appendChild(flower);
+
+        // Remove the flower after the animation to avoid cluttering the page
+        setTimeout(() => {
+          flower.remove();
+        }, 3000); // Match with the duration of the animation (3 seconds)
+      }
+    });
+  </script>
+</body>
+</html>
+
+     
+
+ 
